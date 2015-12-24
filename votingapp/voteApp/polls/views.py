@@ -3,20 +3,24 @@ from django.http import HttpResponse,HttpResponseRedirect
 from .models import Question,Choice
 from django.core.urlresolvers import reverse
 from django.views import generic
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 class IndexView(generic.ListView):
-	queryset = Question.objects.order_by('-pub_date')[:5]
-	context = 'latest_question_list'
-	template = 'polls/index.html'
+	template_name = 'polls/index.html'
+	context_object_name = 'latest_question_list'
+	def get_queryset(self):
+		return Question.objects.order_by('-pub_date')[:5]
 
 class DetailsView(generic.DetailView):
-	template_name = 'polls/detail.html'
 	model = Question
+	template_name = 'polls/detail.html'
+
 
 class ResultsView(generic.DetailView):
-	template_name = 'polls/results.html'
 	model = Question
-
+	template_name = 'polls/results.html'
+	
+@login_required
 def vote(request,question_id):
 	ques = get_object_or_404(Question,pk=question_id)
 	try:

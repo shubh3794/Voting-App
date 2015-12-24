@@ -1,9 +1,10 @@
 from django.db import models
 from django.conf import settings
+from authentication.models import Account
 
 # Create your models here.
 class Question(models.Model):
-
+	createdby = models.ForeignKey(Account,on_delete=models.CASCADE, blank=True, null=True)
 	question_text = models.CharField(max_length=2000,null=False)
 	pub_date = models.DateTimeField('date published',auto_now_add=True)
 	def save(self, *args, **kwargs):
