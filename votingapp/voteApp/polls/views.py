@@ -13,7 +13,7 @@ class IndexView(generic.ListView):
 
 class DetailsView(generic.DetailView):
 	model = Question
-	template_name = 'polls/detail.html'
+	template_name = 'polls/details.html'
 
 
 class ResultsView(generic.DetailView):
@@ -24,12 +24,14 @@ class ResultsView(generic.DetailView):
 def vote(request,question_id):
 	ques = get_object_or_404(Question,pk=question_id)
 	try:
-		selected_choice = p.choice_set.get(pk=request.POST['choice'])
-	except:
-		return render(request,polls/details.html,{
+		selected_choice = ques.choice_set.get(pk=request.POST['choice'])
+	except (KeyError, Choice.DoesNotExist):
+		return render(request,'polls/details.html',{
 			'question':ques,
-			'error':'No choice selected',
+			'error_message':'No choice selected',
 			})
+	selected_choice.votes += 1
+	selected_choice.save()
 	return HttpResponseRedirect(reverse('polls:results', args=(ques.id,)))
 
 
