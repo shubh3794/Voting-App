@@ -1,3 +1,13 @@
 .container{
 	width:80% !important;
+	font-size:18px !important;
+	color:black !important;
+	border-radius:5px;
+}
+.brand-logo{
+	margin-left:20px;
+}
+#list-anchors{
+	color:#424242!important;
+	font-weight:bold;
 }
