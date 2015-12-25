@@ -5,7 +5,6 @@
 {% endblock %}
  {% block script %}
  <script>
-var count = 4
 var addTolist = function(){
   $('#choice_list').append("<li><input type = 'text' name = 'choice' id = 'choice'/></li>");
 };
@@ -26,14 +25,14 @@ $('.modal-trigger').leanModal();
     <div class="modal-content">
     <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat right">Close</a>
       <h4>Create a Poll</h4>
-      <form action ="" method = 'post'>
+      <form action ={% url 'polls:create' %} method = 'post'>
     {% csrf_token %}
     <span>Enter the poll</span><br>
-    <input type = 'text' name = 'newques' id = 'newques' maxlength="2000"/>
+    <input type = 'text' name = 'newques' id = 'newques' maxlength="2000" required/>
     <span>Add choices</span><br>
     <ul id="choice_list">
-    <li><input type = 'text' name = 'choice' id = 'choice'/></li>
-      <li><input type = 'text' name = 'choice' id = 'choice'/></li>
+    <li><input type = 'text' name = 'choice' id = 'choice' required/></li>
+      <li><input type = 'text' name = 'choice' id = 'choice' required/></li>
 </ul>
       <a class="btn waves-effect waves-light purple darken-3" onclick="addTolist()">Add
     <i class="add"></i> </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
