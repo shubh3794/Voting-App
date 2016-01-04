@@ -50,6 +50,7 @@
 	position:relative;
 	background:white;
 	border-radius:4px;
+	max-height:500px !important;
 }
 .collection{
 	top:50px;
@@ -83,4 +84,12 @@
 }
 a{
 	color:#bf360c;
+}
+.detailcard{
+	padding:5px;
+	padding-left:10px;
+	padding-bottom:15px;
+}
+[type="radio"]:checked{
+    color:#bf350c !important;
 }
