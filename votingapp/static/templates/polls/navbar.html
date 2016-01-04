@@ -1,3 +1,4 @@
+
 {% load staticfiles%}
  <nav class="deep-orange darken-4">
     <div class="nav-wrapper">
@@ -33,3 +34,35 @@
     </div>
   </nav>
 
+ {% block script %}
+ <script>
+var addTolist = function(){
+  $('#choice_list').append("<li><input type = 'text' name = 'choice' id = 'choice'/></li>");
+};
+</script>
+{% endblock %}
+
+
+{% block content %}
+<div id="modal1" class="modal">
+    <div class="modal-content">
+    <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat right">Close</a>
+      <h4>Create a Poll</h4>
+      <form action ={% url 'polls:create' %} method = 'post'>
+    {% csrf_token %}
+    <span>Enter the poll</span><br>
+    <input type = 'text' name = 'newques' id = 'newques' maxlength="2000" required/>
+    <span>Add choices</span><br>
+    <ul id="choice_list">
+    <li><input type = 'text' name = 'choice' id = 'choice' required/></li>
+      <li><input type = 'text' name = 'choice' id = 'choice' required/></li>
+</ul>
+      <a class="btn waves-effect waves-light deep-orange darken-4" onclick="addTolist()">Add
+    <i class="add"></i> </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button class="btn waves-effect waves-light deep-orange darken-4" type="submit" name="action">Submit
+    <i class="material-icons right">send</i>
+    </form>
+    </div>
+      
+</div>
+{% endblock %}
