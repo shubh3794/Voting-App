@@ -50,7 +50,9 @@
 	position:relative;
 	background:white;
 	border-radius:4px;
-	min-height:500px;
+}
+.collection{
+	top:50px;
 }
 #btn-flt{
 	color:white;
@@ -63,4 +65,22 @@
 .icon-add{
 	font-size:18px !important;
 	font-weight:500 !important;
+}
+.small{
+	font-size:12px;
+	margin-top:7px !important;
+}
+.big{
+	font-size:20px !important;
+	font-weight:bold;
+	color:#424242;
+}
+.material-icons{
+	color: #424242;
+}
+.material-icons:hover{
+	color: #bf360c;
+}
+a{
+	color:#bf360c;
 }

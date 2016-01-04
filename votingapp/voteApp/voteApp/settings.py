@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-LOGIN_URL = "polls/login.html"
+LOGIN_URL = "/authenticate/login"
 # Application definition
 
 INSTALLED_APPS = (

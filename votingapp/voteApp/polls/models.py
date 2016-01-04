@@ -9,12 +9,11 @@ class Question(models.Model):
 	question_text = models.CharField(max_length=2000,null=False)
 	pub_date = models.DateTimeField('date published')
 	def save(self, *args, **kwargs):
-		print settings.BASE_DIR
-		print self.question_text
 		if self.question_text[len(self.question_text)-1] != '?':
 			print 'question should end with question mark'
 			return
 		else:
+			self.pub_date = timezone.now()
 			super(Question,self).save(*args,**kwargs)
 	def was_published_recently(self):
 		return self.pub_date >= timezone.now() - datetime.timedelta(days=1)

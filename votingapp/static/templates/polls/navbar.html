@@ -1,7 +1,7 @@
 {% load staticfiles%}
  <nav class="deep-orange darken-4">
     <div class="nav-wrapper">
-      <a href="/polls" class="brand-logo left hide-on-med-and-down">iVote</a>
+      <a href="/" class="brand-logo left hide-on-med-and-down">iVote</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
       {% if not request.user.is_authenticated %}
         <li><a href={% url 'auuth:login' %}>Login</a></li>

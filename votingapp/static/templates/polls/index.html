@@ -46,9 +46,15 @@ $('.modal-trigger').leanModal();
 </div>
 <div class="content">
 {% if latest_question_list %}
-    <ul>
-    {% for question in latest_question_list %}
-        <li><a id="list-anchors" href="{% url 'polls:details' question.id %}">{{ question.question_text }}</a></li>
+  <ul class="collection">
+  {% for question in latest_question_list %}
+    <li class="collection-item avatar">
+<!--       <img src="images/yuna.jpg" alt="" class="circle"> -->
+      <span class="title big">{{ question.question_text |capfirst}}</span>
+      <p class="small"> by : <a href="#">{{question.createdby|capfirst}}</a>
+      </p>
+      <a href="{% url 'polls:details' question.id %}" class="secondary-content tooltipped" data-tooltip="View?"><i class="material-icons">visibility</i></a>
+    </li>
     {% endfor %}
     </ul>
 {% else %}
