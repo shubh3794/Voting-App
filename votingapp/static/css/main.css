@@ -16,11 +16,19 @@
 	font-weight:bold;
 }
 .responsive-img{
-	opacity:0.2;
+	opacity:1;
+	border:2px solid white;
 }
 
 #tinted-image{
 	background-color:rgba(0,0,0,0.8);
+	min-height:350px;
+	color:white;
+	text-align:center !important;
+}
+.tinted-image{
+	background-color:#bf350c;
+	opacity:1;
 	min-height:350px;
 	color:white;
 	text-align:center !important;
@@ -95,4 +103,12 @@ a{
 }
 .notifier{
 	color:green;
+}
+.profile-font{
+	color:white;
+	font-size:25px;
+	font-family:Roboto, sans-serif;
+	font-weight:bold;
+	letter-spacing: -0.0em;
+	width:100%;
 }

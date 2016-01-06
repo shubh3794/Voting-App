@@ -1,1 +1,10 @@
 {% extends 'polls/base.html' %}
+{% load staticfiles %}
+{% block jumbotron %}
+{% if Profile %}
+	<div class="tinted-image" class="col s12 m12 l12 valign-wrapper">
+	<img src='{% static "img/me.jpg" %}' alt="" class="valign circle responsive-img"/>
+	<p class="valign center-align profile-font">{{Profile.username|capfirst}}<br/>{{Profile.email}}<br/></p>
+	</div>
+{% endif %}
+{% endblock %}

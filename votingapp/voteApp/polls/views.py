@@ -41,7 +41,9 @@ class ProfileView(generic.ListView):
 	context_object_name = "Profile"
 	template_name = "polls/Profile.html"
 	def get_queryset(self):
-		return Account.objects.filter(email=self.request.user.email,username=self.request.user.username)
+		a = Account.objects.get(email=self.request.user.email,username=self.request.user.username)
+		print a.email,a.username,"yayaya"
+		return a
 	def get_context_data(self,**kwargs):
 		context = super(ProfileView, self).get_context_data(**kwargs)
 		ques = alreadyVoted.objects.filter(user=self.request.user).values_list('ques',flat=True)
