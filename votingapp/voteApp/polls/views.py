@@ -1,6 +1,6 @@
 from django.shortcuts import render,get_object_or_404
 from django.http import HttpResponse,HttpResponseRedirect
-from .models import Question,Choice
+from .models import Question,Choice,alreadyVoted
 from django.core.urlresolvers import reverse
 from django.views import generic
 from django.contrib.auth.decorators import login_required
@@ -9,8 +9,19 @@ import datetime
 class IndexView(generic.ListView):
 	template_name = 'polls/index.html'
 	context_object_name = 'latest_question_list'
+	voted = None
+	
 	def get_queryset(self):
 		return Question.objects.order_by('-pub_date')
+
+	def get_context_data(self, *args, **kwargs):
+		
+		context = super(IndexView,self).get_context_data(*args, **kwargs)
+		if self.request.user.is_authenticated():
+			self.voted = alreadyVoted.objects.filter(user=self.request.user).values_list('ques',flat=True).order_by('id')
+			print self.voted
+			context['voted'] = self.voted
+		return context
 
 class DetailsView(generic.DetailView):
 	model = Question
@@ -24,7 +35,6 @@ class ResultsView(generic.DetailView):
 @login_required
 def vote(request,question_id):
 	ques = get_object_or_404(Question,pk=question_id)
-	print request.user.is_authenticated(),"trytrytrytyryrtyrytrytyrytyrytyrytr"
 	try:
 		selected_choice = ques.choice_set.get(pk=request.POST['choice'])
 	except (KeyError, Choice.DoesNotExist):
@@ -34,6 +44,8 @@ def vote(request,question_id):
 			})
 	selected_choice.votes += 1
 	selected_choice.save()
+	savedVote = alreadyVoted.objects.create(user = request.user, ques=Question.objects.get(pk=question_id))
+	savedVote.save()
 	return HttpResponseRedirect(reverse('polls:results', args=(ques.id,)))
 
 @login_required

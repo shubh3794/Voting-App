@@ -15,6 +15,9 @@
       <span class="title big">{{ question.question_text |capfirst}}</span>
       <p class="small"> by : <a href="#">{{question.createdby|capfirst}}</a>
       </p>
+      {% if question.pk in voted %}
+        <a href="#" class="tooltipped" data-tooltip="already casted a vote"><i class="material-icons"></i>done</a>
+      {% endif %}
       <a href="{% url 'polls:details' question.id %}" class="secondary-content tooltipped" data-tooltip="View?"><i class="material-icons">visibility</i></a>
     </li>
     {% endfor %}
