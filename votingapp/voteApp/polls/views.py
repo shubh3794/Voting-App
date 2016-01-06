@@ -4,6 +4,7 @@ from .models import Question,Choice,alreadyVoted
 from django.core.urlresolvers import reverse
 from django.views import generic
 from django.contrib.auth.decorators import login_required
+from authentication.models import Account
 import datetime
 # Create your views here.
 class IndexView(generic.ListView):
@@ -35,6 +36,26 @@ class DetailsView(generic.DetailView):
 			context['voted'] = alreadyVoted.objects.filter(user=self.request.user,ques=ques).values_list('ques',flat=True)
 			context['voted'] = context['voted'][0]
 		return context
+
+class ProfileView(generic.ListView):
+	context_object_name = "Profile"
+	template_name = "polls/Profile.html"
+	def get_queryset(self):
+		return Account.objects.filter(email=self.request.user.email,username=self.request.user.username)
+	def get_context_data(self,**kwargs):
+		context = super(ProfileView, self).get_context_data(**kwargs)
+		ques = alreadyVoted.objects.filter(user=self.request.user).values_list('ques',flat=True)
+		self.votedQues=[]
+		for i in ques:
+			self.votedQues.append(Question.objects.get(pk=i))
+
+		self.created = Question.objects.filter(createdby=self.request.user)
+		context['created'] = self.created
+		context['voted'] = self.votedQues
+		return context
+
+
+
 
 
 class ResultsView(generic.DetailView):
