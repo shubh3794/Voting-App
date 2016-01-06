@@ -29,3 +29,7 @@ class Choice(models.Model):
     votes = models.IntegerField(default=0)
     def __unicode__(self):
 		return self.choice_text
+
+class alreadyVoted(models.Model):
+	user = models.ForeignKey(Account,on_delete=models.CASCADE)
+	ques = models.ForeignKey(Question,on_delete=models.CASCADE)	
