@@ -93,3 +93,6 @@ a{
 [type="radio"]:checked{
     color:#bf350c !important;
 }
+.notifier{
+	color:green;
+}

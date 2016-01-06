@@ -26,6 +26,15 @@ class IndexView(generic.ListView):
 class DetailsView(generic.DetailView):
 	model = Question
 	template_name = 'polls/details.html'
+	def get_context_data(self, **kwargs):
+		context = super(DetailsView, self).get_context_data(**kwargs)
+		if self.request.user.is_authenticated():
+			a = self.request.get_full_path()
+			ques = int(a[1:])
+			ques = Question.objects.get(pk=ques)
+			context['voted'] = alreadyVoted.objects.filter(user=self.request.user,ques=ques).values_list('ques',flat=True)
+			context['voted'] = context['voted'][0]
+		return context
 
 
 class ResultsView(generic.DetailView):

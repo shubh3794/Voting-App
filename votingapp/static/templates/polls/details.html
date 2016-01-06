@@ -12,10 +12,13 @@
     <label for="choice{{forloop.counter}}">{{choice.choice_text|capfirst}} </label><br/>
 {% endfor %}
 <br>
-<br>
+{% if voted %}
+	<p class = "notifier"><strong>&nbsp;&nbsp; You have already voted here. <a href="/">Chose other question!</a></strong></p>
+{% else %}
   <button class="btn waves-effect waves-light deep-orange darken-4" type="submit" name="action">Submit
     <i class="material-icons right">send</i>
   </button>
+{% endif %}
 </form>
 </div>
 {% endblock %}
