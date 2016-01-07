@@ -34,7 +34,10 @@ class DetailsView(generic.DetailView):
 			ques = int(a[1:])
 			ques = Question.objects.get(pk=ques)
 			context['voted'] = alreadyVoted.objects.filter(user=self.request.user,ques=ques).values_list('ques',flat=True)
-			context['voted'] = context['voted'][0]
+			if len(context['voted'])>=1:
+				context['voted'] = context['voted'][0]
+			else:
+				context['voted']=None
 		return context
 
 class ProfileView(generic.ListView):
@@ -51,7 +54,7 @@ class ProfileView(generic.ListView):
 		for i in ques:
 			self.votedQues.append(Question.objects.get(pk=i))
 
-		self.created = Question.objects.filter(createdby=self.request.user)
+		self.created = Question.objects.filter(createdby=self.request.user).order_by('-pub_date')
 		context['created'] = self.created
 		context['voted'] = self.votedQues
 		return context

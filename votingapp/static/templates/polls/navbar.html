@@ -10,6 +10,7 @@
         <li><a href={% url 'auuth:login' %}>Create Poll</a></li>
         
       {% else %}
+      <li><a href={% url 'polls:profile' %}>Profile</a></li> 
         <li><a href={% url 'auuth:logout' %}>Logout</a></li>
         <li><a href='#modal1' class="modal-trigger">Create Poll</a></li>
       
@@ -17,7 +18,7 @@
 
       
 
-        
+      
       </ul>
       <ul class="right hide-on-large-only">
       {% if not request.user.is_authenticated %}
@@ -26,7 +27,7 @@
         <li><a href={% url 'auuth:login' %}><i class="material-icons">edit</i></a></li>
       {% else %}
         <li><a href={% url 'auuth:logout' %}>Logout</a></li>
-      
+      <li><a href={% url 'polls:profile' %}>Profile</a></li> 
       <li><a href="#modal1" class="modal-trigger"><i class="material-icons">edit</i></a></li>
       {% endif %}
       

@@ -112,3 +112,12 @@ a{
 	letter-spacing: -0.0em;
 	width:100%;
 }
+.profilehead1{
+	color:#424242;
+	font-family:Roboto, sans-serif;
+	font-weight:bold;
+	letter-spacing: -0.0em;
+	width:100%;
+	margin-bottom:-40px;
+	margin-top:50px;
+}
