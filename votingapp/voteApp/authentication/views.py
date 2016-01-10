@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login,logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
+from django.shortcuts import render,get_object_or_404
 # Create your views here.
 
 def user_signup(request):
@@ -11,15 +12,15 @@ def user_signup(request):
 		email = request.POST['email']
 		password = request.POST['password']
 		username = request.POST['username']
-		acc = Account.objects.get(email=email)
+		acc = authenticate(email=email,password=password)
 		if not acc:
-			user = Account.objects.create_user(email,password,{'username':username})
-			authenticate(email=email,password=password)
+			user = Account.objects.create_user(email,password,username=username)
+			login(request,user)
 			return HttpResponseRedirect(reverse('polls:index'))
 		else:
-			acc =authenticate(email=email,password=password)
+			
 			if acc.is_active:
-				login(request,user)
+				login(request,acc)
 				return HttpResponseRedirect(reverse('polls:index'))
 			else:
 				return render(request,'polls/signup.html',{'error':'User already exists, login with correct details'})
