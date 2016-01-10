@@ -22,13 +22,13 @@
       </ul>
       <ul class="right hide-on-large-only">
       {% if not request.user.is_authenticated %}
-        <li><a href= 'login.html'><i class="material-icons">account_circle</i></a></li>
-        <li><a href='signup.html'><i class="material-icons">person_add</i></a></li>
-        <li><a href={% url 'auuth:login' %}><i class="material-icons">edit</i></a></li>
+        <li><a href= {% url 'auuth:login' %}>Login</a></li>
+        <li><a href={% url 'auuth:signup' %}>Signup</a></li>
+      <li><a href={% url 'auuth:login' %}><i class="material-icons w">edit</i></a></li>
       {% else %}
         <li><a href={% url 'auuth:logout' %}>Logout</a></li>
       <li><a href={% url 'polls:profile' %}>Profile</a></li> 
-      <li><a href="#modal1" class="modal-trigger"><i class="material-icons">edit</i></a></li>
+      <li><a href="#modal1" class="modal-trigger"><i class="material-icons w">edit</i></a></li>
       {% endif %}
       
       </ul>

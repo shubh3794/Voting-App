@@ -80,9 +80,10 @@
 	margin-top:7px !important;
 }
 .big{
-	font-size:20px !important;
+	font-size:18px !important;
 	font-weight:bold;
 	color:#424242;
+	padding-left:2px;
 }
 .material-icons{
 	color: #424242;
@@ -120,4 +121,20 @@ a{
 	width:100%;
 	margin-bottom:-40px;
 	margin-top:50px;
+}
+.w{
+	color:white;
+}
+.collection .collection-item.avatar {
+    min-height: 84px;
+    position: relative;
+    padding-left: 40px;
+}
+
+@media (max-width:500px){
+	.collection .collection-item.avatar {
+    min-height: 84px;
+    position: relative;
+    padding-left: 20px;
+}
 }
