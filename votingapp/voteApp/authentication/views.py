@@ -15,6 +15,7 @@ def user_signup(request):
 		acc = authenticate(email=email,password=password)
 		if not acc:
 			user = Account.objects.create_user(email,password,username=username)
+			user = authenticate(email=email,password=password)
 			login(request,user)
 			return HttpResponseRedirect(reverse('polls:index'))
 		else:

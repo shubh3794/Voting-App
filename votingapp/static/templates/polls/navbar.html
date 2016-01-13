@@ -47,6 +47,7 @@ var addTolist = function(){
 {% block content %}
 <div id="modal1" class="modal">
     <div class="modal-content">
+    {{ error_message }}
     <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat right">Close</a>
       <h4>Create a Poll</h4>
       <form action ={% url 'polls:create' %} method = 'post'>

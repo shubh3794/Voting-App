@@ -130,7 +130,10 @@ a{
     position: relative;
     padding-left: 40px;
 }
-
+.messages{
+	color:red  !important;
+	padding:10px;
+}
 @media (max-width:500px){
 	.collection .collection-item.avatar {
     min-height: 84px;

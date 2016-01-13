@@ -6,6 +6,7 @@ from django.views import generic
 from django.contrib.auth.decorators import login_required
 from authentication.models import Account
 import datetime
+from django.contrib import messages
 # Create your views here.
 class IndexView(generic.ListView):
 	template_name = 'polls/index.html'
@@ -85,19 +86,20 @@ def vote(request,question_id):
 
 @login_required
 def create(request):
-	ques, created = Question.objects.get_or_create(createdby=request.user,question_text=request.POST['newques'], pub_date=datetime.datetime.now())
-	if created:
-		flag = False
-		ques.save()
-		a = request.POST.getlist('choice')
-		for i in range(len(a)):
-			Choice.objects.create(choice_text=a[i],question=ques) 
-		print ques, "\n", ques.choice_set
-		return HttpResponseRedirect(reverse('polls:index'))
+	text = request.POST['newques']
+	if len(text.replace(' ','')) >= 5:
+		ques, created = Question.objects.get_or_create(createdby=request.user,question_text=request.POST['newques'], pub_date=datetime.datetime.now())
+		if created:
+			flag = False
+			ques.save()
+			a = request.POST.getlist('choice')
+			for i in range(len(a)):
+				if len(a[i].replace(' ',''))>=1:
+					Choice.objects.create(choice_text=a[i],question=ques) 
+			print ques, "\n", ques.choice_set
+			return HttpResponseRedirect(reverse('polls:index'))
 	else:
-		print created
-		return render(request,'polls/index.html',{
-			'error_message':'Try again later',
-			})
+		messages.error(request, "Your poll could not be created, please try again with valid values !")
+		return HttpResponseRedirect(reverse('polls:index'))
 
 
