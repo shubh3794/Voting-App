@@ -5,6 +5,9 @@
 <div class="row">
   <div class="col s12 m6 push-m3">
     <div class="card-panel grey lighten-2">
+      {% if error_message %}
+      <span class="messages">{{error_message}}</span>
+      {% endif %}
       <form action = {% url 'auuth:signup' %} method = 'post'>
 		{% csrf_token %}
         <input id="username" type="text" required name="username">
